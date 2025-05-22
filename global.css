@@ -1,4 +1,4 @@
-/* ===== GLOBAL UI CORE (GuardTrack) ===== */
+/* ===== GLOBAL UI (GuardTrack Next-Gen Dashboard) ===== */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -20,8 +20,12 @@
   --bg-dark: #0F1419;
   --neutral-bg: #f0f2f5;
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-  --shadow-hover: 0 8px 16px rgba(0,0,0,0.1);
+  --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
   --transition: all 0.2s ease-in-out;
+  --badge-info-bg: #d9eaf9;
+  --badge-info-color: #0f4c81;
+  --badge-warning-bg: #fff4d4;
+  --badge-warning-color: #a86d00;
 }
 
 * {
@@ -39,15 +43,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.5px;
   color: var(--text-primary);
-  letter-spacing: -0.3px;
-}
-
-h1, h2 {
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 p {
@@ -74,22 +72,23 @@ a:hover {
 
 .btn {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 12px 28px;
   font-size: 15px;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   transition: var(--transition);
+  letter-spacing: 0.3px;
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
+  background-color: var(--primary-dark);
   color: #fff;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--primary-color);
   box-shadow: var(--shadow-md);
 }
 
@@ -135,12 +134,14 @@ label {
 }
 
 .section-header {
-  background-color: var(--primary-light);
-  padding: 1rem 1.5rem;
-  border-left: 4px solid var(--primary-color);
+  background: #eaf3fc;
+  border-left: 6px solid var(--primary-color);
   border-radius: 8px;
+  padding: 12px 20px;
   font-weight: 600;
+  font-size: 16px;
   color: var(--text-primary);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .text-center { text-align: center; }
@@ -190,55 +191,64 @@ label {
 }
 
 .card {
-  background: white;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
+  background: linear-gradient(180deg, #ffffff, #f9fafc);
+  border: 1px solid #e0e6ed;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
-.badge {
+.card::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at center, rgba(0,102,204,0.1), transparent);
+  transform: rotate(45deg);
+}
+
+.badge,
+.badge-info,
+.badge-warning {
+  font-size: 13px;
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-weight: 500;
   display: inline-block;
-  padding: 4px 10px;
-  font-size: 12px;
-  border-radius: 20px;
-  font-weight: 600;
-  background-color: var(--accent-color);
-  color: white;
 }
 
 .badge-info {
-  background-color: #a5d3ef;
-  color: #003f7f;
+  background: var(--badge-info-bg);
+  color: var(--badge-info-color);
 }
 
 .badge-warning {
-  background-color: #ffefa1;
-  color: #7a5e00;
+  background: var(--badge-warning-bg);
+  color: var(--badge-warning-color);
 }
 
 .footer-meta {
+  opacity: 0.8;
+  letter-spacing: 0.5px;
   font-size: 13px;
-  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  margin-top: 40px;
-  text-align: center;
+  margin-top: 60px;
 }
 
 .trusted-logos {
   display: flex;
   justify-content: center;
   gap: 16px;
+  margin-top: 12px;
   flex-wrap: wrap;
-  margin-top: 10px;
-  font-size: 13px;
-  color: var(--text-muted);
 }
