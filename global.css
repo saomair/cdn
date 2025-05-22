@@ -78,11 +78,48 @@ body {
   gap: 0.5rem;
 }
 .card-bordered { border-left: 4px solid var(--border-color); }
-.card-indigo { border-left-color: var(--brand-indigo); }
-.card-success { border-left-color: var(--success-green); }
-.card-alert { border-left-color: var(--alert-red); }
-.card-yellow { border-left-color: var(--star-yellow); }
-.card-info { border-left-color: var(--info-color); }
+.card-indigo {
+  border-left: 4px solid var(--brand-indigo);
+}
+.card-success {
+  border-left: 4px solid var(--success-green);
+}
+.card-alert {
+  border-left: 4px solid var(--alert-red);
+}
+.card-yellow {
+  border-left: 4px solid var(--star-yellow);
+}
+.card-info {
+  border-left: 4px solid var(--info-color);
+}
+
+.card .icon-box {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.card-success .icon-box {
+  background-color: rgba(5, 150, 105, 0.1);
+  color: var(--success-green);
+}
+.card-alert .icon-box {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--alert-red);
+}
+.card-yellow .icon-box {
+  background-color: rgba(251, 191, 36, 0.1);
+  color: var(--star-yellow);
+}
+.card-indigo .icon-box {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--brand-indigo);
+}
 
 /* ==== Issue Badges ==== */
 .issue-badge {
