@@ -3,12 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Brand Colors */
   --primary-color: #0066CC;
   --primary-dark: #0052A3;
   --primary-light: #E6F0FF;
   --accent-color: #00A86B;
   --danger-color: #DC3545;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --success-color: #28a745;
   --text-primary: #1A1F36;
   --text-secondary: #4E5969;
   --text-muted: #8492A6;
@@ -16,11 +18,12 @@
   --bg-primary: #FFFFFF;
   --bg-secondary: #F8FAFB;
   --bg-dark: #0F1419;
+  --neutral-bg: #f0f2f5;
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-hover: 0 8px 16px rgba(0,0,0,0.1);
   --transition: all 0.2s ease-in-out;
 }
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -35,11 +38,16 @@ body {
   color: var(--text-primary);
 }
 
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: -0.3px;
+}
+
+h1, h2 {
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 p {
@@ -58,14 +66,12 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Containers */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Buttons */
 .btn {
   display: inline-block;
   padding: 12px 24px;
@@ -97,7 +103,6 @@ a:hover {
   background-color: var(--primary-light);
 }
 
-/* Forms */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -129,25 +134,27 @@ label {
   color: var(--text-primary);
 }
 
-/* Utility */
-.text-center {
-  text-align: center;
+.section-header {
+  background-color: var(--primary-light);
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
+.text-center { text-align: center; }
 .mt-1 { margin-top: 8px; }
 .mt-2 { margin-top: 16px; }
 .mt-3 { margin-top: 24px; }
-
 .mb-1 { margin-bottom: 8px; }
 .mb-2 { margin-bottom: 16px; }
 .mb-3 { margin-bottom: 24px; }
-
 .text-muted {
   color: var(--text-muted);
   font-size: 14px;
 }
 
-/* Icons */
 .icon-inline {
   display: inline-flex;
   align-items: center;
@@ -155,7 +162,6 @@ label {
   font-size: 14px;
 }
 
-/* Responsive Layouts */
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -174,7 +180,6 @@ label {
   }
 }
 
-/* Animations */
 .fadeIn {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -184,16 +189,20 @@ label {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Cards */
 .card {
   background: white;
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 24px;
   box-shadow: var(--shadow-md);
+  transition: var(--transition);
 }
 
-/* Badges */
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
 .badge {
   display: inline-block;
   padding: 4px 10px;
@@ -204,7 +213,16 @@ label {
   color: white;
 }
 
-/* Footer + Trust Text */
+.badge-info {
+  background-color: #a5d3ef;
+  color: #003f7f;
+}
+
+.badge-warning {
+  background-color: #ffefa1;
+  color: #7a5e00;
+}
+
 .footer-meta {
   font-size: 13px;
   color: var(--text-muted);
