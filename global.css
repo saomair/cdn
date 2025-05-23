@@ -1,218 +1,328 @@
-/* ===== GLOBAL UI (GuardTrack Dashboard) ===== */
+/* GUARDTRACK CONSOLIDATED STYLES */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/*
+  --------------------------------------------------------------------------------
+  ** Developer Notes **
+  This CSS file provides custom styles, brand color variables, and specific component
+  styling for GuardTrack dashboards. It is intended to be used in conjunction
+  with a utility-first CSS framework like Tailwind CSS.
 
+  - Tailwind CSS (or a similar framework) should be used for general layout,
+    spacing, typography, and responsive design.
+  - The CSS Variables defined in Section I should be used for consistent branding.
+  - The Utility Classes in Section IV allow for easy application of brand colors.
+  - Component Styles in Section III provide styling for specific, recurring UI elements
+    that may require more than simple utility classes.
+  --------------------------------------------------------------------------------
+*/
+
+/* --------------------------------------------------------------------------------
+I. CSS VARIABLES (BRAND COLORS & CORE STYLES)
+   - Extracted primarily from guardtrack_dashboard_update_v1
+--------------------------------------------------------------------------------
+*/
 :root {
-  /* Brand Colors */
-  --primary-color: #0066CC;
-  --primary-dark: #0052A3;
-  --primary-light: #E6F0FF;
-  --accent-color: #00A86B;
-  --danger-color: #DC3545;
-  --info-color: #17a2b8;
-  --warning-color: #ffc107;
-  --success-color: #28a745;
-
   --brand-indigo: #4f46e5;
-  --brand-indigo-blue: #2563eb;
+  --brand-indigo-blue: #2563eb; /* Used in Daily Activity Summary */
   --brand-accent-blue: #e0e7ff;
-  --success-green: #059669;
-  --alert-red: #ef4444;
-  --star-yellow: #fbbf24;
-  --indigo-600: #4f46e5;
 
-  /* Text Colors */
-  --text-primary: #1A1F36;
-  --text-secondary: #4E5969;
-  --text-muted: #8492A6;
   --text-dark: #111827;
   --text-mid: #374151;
   --text-light: #6b7280;
 
-  /* Backgrounds & Borders */
-  --border-color: #E1E8ED;
-  --border-grey: #e5e7eb;
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8FAFB;
-  --bg-dark: #0F1419;
-  --neutral-bg: #f0f2f5;
-  --bg-light: #f9fafb;
+  --bg-light: #f9fafb; /* Used for general page background in Welfare Dashboard */
+  --border-grey: #e5e7eb; /* Also --border-color in Daily Activity/DOB */
 
-  /* Shadows & Motion */
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-  --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.1);
-  --transition: all 0.2s ease-in-out;
+  --success-green: #059669; /* Also --brand-green in Daily Activity/DOB */
+  --alert-red: #ef4444;     /* Also --brand-red in Daily Activity/DOB */
+  --star-yellow: #fbbf24;   /* Also --brand-yellow in Daily Activity/DOB */
+  --brand-gray: #6b7280;    /* Used for table headers in Daily Activity/DOB */
 
-  /* Badge Backgrounds */
+
   --badge-green-bg: #dcfce7;
   --badge-yellow-bg: #fef3c7;
   --badge-red-bg: #fee2e2;
-  --badge-info-bg: #d9eaf9;
-  --badge-info-color: #0f4c81;
-  --badge-warning-bg: #fff4d4;
-  --badge-warning-color: #a86d00;
 }
 
+/* --------------------------------------------------------------------------------
+II. GENERAL BODY & FONT STYLES
+    - Common across dashboards
+--------------------------------------------------------------------------------
+*/
 body {
-  font-family: 'Inter', sans-serif;
-  font-size: 16px;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
+    font-family: 'Inter', sans-serif; /* Common font */
+    /* background-color: #f0f2f5; /* Example: Used in Daily Activity & DOB */
+    /* background-color: #f9fafb; /* Example: Used in Welfare (Tailwind: bg-gray-50) */
+    /* Note: Background color is typically set per page via Tailwind or body style attribute. */
 }
 
-/* ==== Utility Elements ==== */
-.bg-white { background-color: #ffffff; }
-.rounded-lg { border-radius: 0.5rem; }
-.shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
-.text-xs { font-size: 0.75rem; }
-.font-semibold { font-weight: 600; }
-
-/* ==== Reusable Cards ==== */
-.card {
-  background-color: var(--bg-primary);
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow-md);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.card-bordered { border-left: 4px solid var(--border-color); }
-.card-indigo {
-  border-left: 4px solid var(--brand-indigo);
-}
-.card-success {
-  border-left: 4px solid var(--success-green);
-}
-.card-alert {
-  border-left: 4px solid var(--alert-red);
-}
-.card-yellow {
-  border-left: 4px solid var(--star-yellow);
-}
-.card-info {
-  border-left: 4px solid var(--info-color);
+.main-heading { /* From Daily Activity & DOB */
+    color: #1f2937; 
 }
 
-.card .icon-box {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.9;
+/* --------------------------------------------------------------------------------
+III. COMPONENT STYLES
+--------------------------------------------------------------------------------
+*/
+
+/* A. Stat Cards (Common styling, refined in Daily Activity) */
+.stat-card {
+    border-left-width: 4px; /* Common theme */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: white; /* Common theme */
+    padding: 1.25rem; /* p-5, common */
+    border-radius: 0.5rem; /* rounded-lg, common */
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06); /* Default shadow */
+}
+.stat-card:hover {
+    transform: translateY(-3px); /* Common hover effect */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Enhanced hover shadow */
+}
+.stat-card-value { 
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 700; /* bold */
+    margin-top: 0.5rem; /* mt-2 */
+    /* Color applied specifically per card using utility classes or inline styles */
+}
+.stat-card-context { 
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* medium */
+    color: var(--text-light); /* text-gray-500 or var(--brand-gray) */
+    margin-left: 0.25rem; /* ml-1 */
 }
 
-.card-success .icon-box {
-  background-color: rgba(5, 150, 105, 0.1);
-  color: var(--success-green);
+/* B. Tables (General styling from Daily Activity & DOB, applicable to Welfare) */
+.table th, .table td {
+    padding: 0.75rem 1rem; 
+    text-align: left;
+    border-bottom-width: 1px;
+    border-color: var(--border-grey); /* --border-color */
+    vertical-align: top; 
 }
-.card-alert .icon-box {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: var(--alert-red);
+.table tbody tr:last-child td {
+    border-bottom-width: 0;
 }
-.card-yellow .icon-box {
-  background-color: rgba(251, 191, 36, 0.1);
-  color: var(--star-yellow);
-}
-.card-indigo .icon-box {
-  background-color: rgba(79, 70, 229, 0.1);
-  color: var(--brand-indigo);
+.table thead th {
+    background-color: var(--light-gray-bg);
+    font-weight: 600; 
+    color: var(--brand-gray);
+    text-transform: uppercase;
+    font-size: 0.75rem; 
+    letter-spacing: 0.05em;
+    position: sticky; /* For scrollable table bodies */
+    top: 0;
+    z-index: 5; 
 }
 
-/* ==== Issue Badges ==== */
+/* C. Issue Badges (from Officer Welfare Dashboard) */
 .issue-badge {
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
 }
-
 .issue-missed { background-color: var(--alert-red); color: white; }
 .issue-fatigue { background-color: var(--star-yellow); color: var(--text-dark); }
 .issue-escalation { background-color: var(--brand-indigo); color: white; }
 .issue-late { background-color: var(--badge-yellow-bg); color: var(--text-dark); }
 
-/* ==== Heatmap ==== */
-.heatmap-cell {
-  width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.75rem; font-weight: 600;
-  border-radius: 4px;
-}
-.heat-0 { background-color: #dcfce7; color: #059669; }
-.heat-1 { background-color: #fef3c7; color: #b45309; }
-.heat-2 { background-color: #fee2e2; color: #ef4444; }
-.heat-3 { background-color: #fecaca; color: #b91c1c; }
-
-/* ==== Chart Legends ==== */
-.legend-item {
-  display: flex;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  margin-bottom: 0.25rem;
-}
-@media (min-width: 640px) {
-  .legend-item { margin-bottom: 0; }
-}
-.legend-color-box {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 0.125rem;
-  margin-right: 0.5rem;
-}
-
-/* ==== Filters & Buttons ==== */
-.filter-btn {
-  transition: background-color 0.2s, color 0.2s;
-}
-.filter-btn.active {
-  background-color: var(--brand-indigo);
-  color: white;
-}
-.load-more-btn {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 0.5rem;
-  margin-top: 1rem;
-  background-color: var(--brand-accent-blue);
-  color: var(--brand-indigo);
-  border-radius: 0.375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.load-more-btn:hover {
-  background-color: #c7d2fe;
-}
-
-/* ==== Progress Bars ==== */
-.progress-bar {
+/* D. Progress Bars (from Officer Welfare Dashboard & Daily Activity/DOB Indicators) */
+.progress-bar { /* General container from Welfare, can be adapted */
   height: 8px;
   border-radius: 4px;
   overflow: hidden;
+  background-color: var(--border-grey); /* Default background */
 }
-.progress-fill {
+.progress-fill { /* Fill part from Welfare */
   height: 100%;
+  /* background-color applied dynamically via JS or utility classes */
 }
 
-/* ==== Text & Border Utility Colors ==== */
-.text-success-green { color: var(--success-green); }
-.text-star-yellow { color: var(--star-yellow); }
-.text-alert-red { color: var(--alert-red); }
-.text-brand-indigo { color: var(--brand-indigo); }
-.border-success-green { border-color: var(--success-green); }
-.border-star-yellow { border-color: var(--star-yellow); }
-.border-alert-red { border-color: var(--alert-red); }
-.border-brand-indigo { border-color: var(--brand-indigo); }
-.border-indigo-600 { border-color: var(--indigo-600); }
+.indicator-bar-container { /* From Daily Activity & DOB */
+    background-color: #e9ecef; 
+    border-radius: 0.375rem; 
+    overflow: hidden;
+    height: 1.25rem; 
+}
+.indicator-bar-fill { /* From Daily Activity & DOB, more detailed */
+    height: 100%;
+    border-radius: 0.375rem; 
+    transition: width 0.6s cubic-bezier(0.25, 0.1, 0.25, 1); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 500;
+    /* background-color applied dynamically via JS or utility classes */
+}
 
-/* ==== Background Utility Colors ==== */
+
+/* E. Heatmap Cells (from Officer Welfare Dashboard) */
+.heatmap-cell {
+  width: 36px; height: 36px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 600;
+}
+.heat-0 { background-color: var(--badge-green-bg); color: var(--success-green); } 
+.heat-1 { background-color: var(--badge-yellow-bg); color: #b45309; } /* Color from Welfare */
+.heat-2 { background-color: var(--badge-red-bg); color: var(--alert-red); } 
+.heat-3 { background-color: #fecaca; color: #b91c1c; } /* Specific red shades from Welfare */
+
+/* F. Buttons */
+    /* Load More Button (from Officer Welfare Dashboard) */
+    .load-more-btn {
+      display: block; width: 100%; text-align: center;
+      padding: 0.5rem; margin-top: 1rem;
+      background-color: var(--brand-accent-blue); color: var(--brand-indigo);
+      border-radius: 0.375rem; font-weight: 500; cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .load-more-btn:hover { background-color: #c7d2fe; } /* Slightly darker accent blue */
+
+    /* Filter Buttons (Base style for filter buttons in Welfare, also used in DOB dropdown options) */
+    .filter-btn { 
+        transition: background-color 0.2s, color 0.2s;
+        /* Base styling (padding, bg, text color, rounded) often handled by Tailwind.
+           This class is for JS hooks or minor shared transitions. */
+    }
+    .filter-btn.active { /* Common active state for filter groups */
+        background-color: var(--brand-indigo); /* Default active color */
+        color: white;
+    }
+
+    /* Dropdown Specific Button Styles (from Daily Activity & DOB) */
+    .dropdown-toggle-btn { /* The main button that shows the current filter and toggles dropdown */
+        background-color: white;
+        color: var(--brand-blue); /* Or var(--brand-indigo) if preferred */
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem; 
+        font-weight: 500; 
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem; 
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+    }
+    .dropdown-toggle-btn svg { /* Arrow icon in the dropdown toggle */
+        margin-left: 0.5rem;
+        width: 1rem; 
+        height: 1rem; 
+        transition: transform 0.2s;
+    }
+    .dropdown-toggle-btn.open svg { /* Rotated arrow when dropdown is open */
+        transform: rotate(180deg);
+    }
+    .dropdown-content button { /* Style for items (options) within the dropdown panel */
+        color: black;
+        padding: 10px 14px; 
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        text-align: left;
+        background-color: white;
+        border: none;
+        font-size: 0.875rem; 
+    }
+    .dropdown-content button:hover {background-color: #f1f1f1;}
+    .dropdown-content button.active { /* Active item within dropdown list */
+        background-color: var(--brand-blue); /* Or var(--brand-indigo) */
+        color: white;
+    }
+
+
+/* G. Legend Items (from Officer Welfare Dashboard & Daily Activity Chart) */
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem; 
+    font-weight: 500; 
+    padding: 0.25rem 0.75rem; 
+    border-radius: 9999px; /* rounded-full */
+    margin-bottom: 0.25rem; /* For stacking on small screens */
+}
+@media (min-width: 640px) { /* sm breakpoint */
+    .legend-item {
+        margin-bottom: 0; /* No margin when side-by-side */
+    }
+}
+.legend-color-box {
+    width: 0.75rem; 
+    height: 0.75rem; 
+    border-radius: 0.125rem; /* rounded-sm */
+    margin-right: 0.5rem; 
+}
+
+/* H. Section Container (from Daily Activity & DOB) */
+.section-container {
+    background-color: white;
+    padding: 1.5rem; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem; 
+}
+
+
+/* I. DOB Specific Entry Styles (from dob_dashboard_v1) */
+.dob-entry-type {
+    font-weight: 500;
+}
+.dob-entry-late {
+    color: var(--brand-red);
+    font-style: italic;
+}
+.dob-entry-ontime {
+    color: var(--brand-green);
+}
+.dob-entry-alert {
+    color: var(--brand-red);
+    font-weight: 600;
+}
+.dob-entry-missed {
+    color: var(--brand-yellow); 
+    font-weight: 500;
+}
+
+
+/* --------------------------------------------------------------------------------
+IV. UTILITY CLASSES FROM CSS VARIABLES (from Officer Welfare Dashboard)
+    - These allow direct use of brand colors via classes.
+    - Example Usage: <div class="bg-brand-indigo text-white p-4">...</div>
+--------------------------------------------------------------------------------
+*/
+.bg-brand-indigo { background-color: var(--brand-indigo); }
+.bg-brand-accent-blue { background-color: var(--brand-accent-blue); }
+.text-brand-indigo { color: var(--brand-indigo); }
+.border-brand-indigo { border-color: var(--brand-indigo); }
+
+.bg-success-green { background-color: var(--success-green); }
+.bg-alert-red { background-color: var(--alert-red); }
+/* .bg-star-yellow { background-color: var(--star-yellow); } /* Often handled by Tailwind's yellow scale */
+
+
 .bg-badge-green-bg { background-color: var(--badge-green-bg); }
 .bg-badge-yellow-bg { background-color: var(--badge-yellow-bg); }
 .bg-badge-red-bg { background-color: var(--badge-red-bg); }
-.bg-brand-accent-blue { background-color: var(--brand-accent-blue); }
+
+
+.text-success-green { color: var(--success-green); }
+.text-alert-red { color: var(--alert-red); }
+.text-star-yellow { color: var(--star-yellow); }
+
+/* --------------------------------------------------------------------------------
+V. Dropdown Structure (from dob_dashboard_v1 - HTML structure for context)
+   - This is not CSS, but shows how the dropdown button styles might be applied.
+--------------------------------------------------------------------------------
+<!--
+    <div class="dropdown">
+        <button id="filter-dropdown-toggle" class="dropdown-toggle-btn">
+            <span id="current-filter-display">Today</span> 
+            <svg class="w-4 h-4 ml-2">...</svg> // Example SVG for dropdown arrow
+        </button>
+        <div id="filter-options" class="dropdown-content">
+            <button type="button" data-filter="today" class="filter-option active">Today</button>
+            <button type="button" data-filter="week" class="filter-option">This Week</button>
+            ...
+        </div>
+    </div>
+-->
+*/
